@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+完了しました
+<div th:object="${user}">
+<p th:text="*{name} + さん、こんにちは"></p>
+</div>
+<a th:href="@{./view}">前のページへ戻る</a>
+
+</body>
+</html>

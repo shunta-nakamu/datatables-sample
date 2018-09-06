@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>send sample</title>
+<link rel="stylesheet" th:href="@{/css/style.css}">
+<link rel="stylesheet" th:href="@{css/modaal.css}">
+<script src='//ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+<link rel="stylesheet"
+	href="//cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css">
+
+<script src="//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script>
+	function filterColumn(i) {
+		$('#example').DataTable().column(i).search(
+				$('#col' + i + '_filter').val()).draw();
+	}
+
+	$(document).ready(function() {
+		//$('#example').dataTable();
+		$("#example").DataTable({
+   
+    	//スクロールあり false:スクロールなし 数値:その高さを超える場合にスクロール
+    scrollY: true,
+    scrollX: true,
+    scrollCollapse: true,
+    //ページング
+    paging: true,
+    
+});
+
+		$('input.column_filter').on('keyup click', function() {
+			filterColumn($(this).parents('tr').attr('data-column'));
+		});
+	});
+</script>
+</head>
+<body>
+	<div id="main">
+
+		<ul>
+			<li>仕事１</li>
+
+		</ul>
+		<a href="#modal" class="modal">ユーザ登録</a>
+
+		<div id="modal" style="display: none;">
+			<h1>ユーザー情報の登録</h1>
+			<form method="post" th:action="@{./addUser}" th:object="${userForm}"
+				onSubmit="return check()">
+				<table style="width: 67%; margin: 0 auto 2em auto;" border="0"
+					cellpadding="3" cellspacing="0">
+
+				</table>
+				<table id="example" class="display" cellspacing="0" width="100%">
+					<thead>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</thead>
+
+					<tfoot>
+						<tr>
+							<th>Name</th>
+						</tr>
+					</tfoot>
+
+					<tbody>
+						<tr th:each="item: ${itemList}" th:object="${item}">
+							<td><span class="label label-default" th:text="*{name}"
+								width="300px" style="background-color: #00FFFF"></span></td>
+						</tr>
+
+					</tbody>
+				</table>
+			</form>
+		</div>
+	</div>
+
+
+	<script th:src="@{js/main.js}"></script>
+	<script th:src="@{js/modaal.min.js}"></script>
+
+</body>
+</html>

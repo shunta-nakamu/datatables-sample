@@ -1,0 +1,21 @@
+package com.example.demo.repository;
+
+import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Repository;
+
+import com.example.demo.domain.Item;
+
+@Repository
+public class MercariRepository {
+
+	private static final RowMapper<Item> ITEMS_ROW_MAPPER = (rs, i) -> {
+		Item item = new Item();
+
+		item.setId(rs.getInt("id"));
+		item.setName(rs.getString("name"));
+
+		return item;
+
+	};
+
+}
